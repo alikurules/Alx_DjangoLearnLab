@@ -1,3 +1,3 @@
-retrieve = Book.objects.get(publication_year = 1949)
+retrieve = Book.objects.get(title = '1984')
 
 # Python command for showing the details of the book.
