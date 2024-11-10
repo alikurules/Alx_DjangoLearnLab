@@ -29,7 +29,7 @@ class CustomLogoutView(LogoutView):
 
 # Registration view
 class RegisterView(View):
-    form_class = UserCreationForm
+    form_class = UserCreationForm()
     template_name = 'relationship_app/register.html'
 
     def get(self, request):
