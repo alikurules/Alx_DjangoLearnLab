@@ -156,11 +156,11 @@ SECURE_HSTS_PRELOAD = True  # Allow the site to be preloaded in browsers' HSTS l
 # Other security-related settings for HTTPS
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # Needed when using a reverse proxy
 
-# Prevent your site from being embedded in an iframe (clickjacking protection)
+
 X_FRAME_OPTIONS = 'DENY'  # Deny all attempts to embed the site in an iframe
 
-# Prevent MIME type sniffing to avoid browsers interpreting content differently than declared
+
 SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent browsers from sniffing the content-type
 
-# Enable browser's XSS filter to prevent cross-site scripting attacks
+
 SECURE_BROWSER_XSS_FILTER = True  # Enable the browser's XSS filtering
