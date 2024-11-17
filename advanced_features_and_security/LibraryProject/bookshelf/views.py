@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from bookshelf.models import Post
+from .forms import ExampleForm
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponseForbidden
 from .models import Book  
@@ -50,4 +51,18 @@ def delete_post(request, post_id):
         post.delete()
         return redirect('post_list')
     return render(request, 'delete_post.html', {'post': post})
+
+def example_view(request):
+    if request.method == "POST":
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            # Process the data in form.cleaned_data
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            # Add processing logic here
+            return render(request, 'bookshelf/success.html', {'title': title})
+    else:
+        form = ExampleForm()
+
+    return render(request, 'bookshelf/example_form.html', {'form': form})
 

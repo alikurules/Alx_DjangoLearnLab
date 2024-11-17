@@ -1,5 +1,8 @@
-<form method="post" action="/submit/">
-    {% csrf_token %}
-    <input type="text" name="example_field">
-    <button type="submit">Submit</button>
-</form>
+from django import forms
+
+class ExampleForm(forms.Form):
+    """
+    A sample form for demonstration purposes.
+    """
+    title = forms.CharField(max_length=100, required=True)
+    description = forms.CharField(widget=forms.Textarea, required=False)
