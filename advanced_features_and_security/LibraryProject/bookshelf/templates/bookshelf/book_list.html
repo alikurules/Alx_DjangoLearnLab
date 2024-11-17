@@ -8,7 +8,10 @@
     <ul>
       {% for book in books %}
       <li>
-        <a href="{% url 'books' book.id %}">{{ book.title }}</a>
+        <form>
+          {% csrf_token %}
+          <a href="{% url 'books' book.id %}">{{ book.title }}</a>
+        </form>
       </li>
       {% endfor %}
     </ul>
