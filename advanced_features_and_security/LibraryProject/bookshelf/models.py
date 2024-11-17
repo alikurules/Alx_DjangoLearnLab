@@ -42,8 +42,6 @@ class CustomUser(AbstractUser):
         return self.email
     
 
-from django.db import models
-
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
@@ -56,6 +54,16 @@ class Post(models.Model):
             ("can_edit", "Can edit post"),
             ("can_delete", "Can delete post"),
         ]
+
+    def __str__(self):
+        return self.title
+
+
+class Book(models.Model):
+    title = models.CharField(max_length=255)
+    author = models.CharField(max_length=255)
+    description = models.TextField()
+    published_date = models.DateField()
 
     def __str__(self):
         return self.title

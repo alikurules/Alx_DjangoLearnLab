@@ -1,10 +1,23 @@
-from django.shortcuts import render
-
-# Create your views here.
-from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, get_object_or_404
+from bookshelf.models import Post
+from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponseForbidden
-from app_name.models import Post
+from .models import Book  
+
+def book_list(request):
+    """
+    View to display a list of all books.
+    """
+    books = Book.objects.all()  
+    return render(request, 'bookshelf/book_list.html', {'books': books})
+
+def books(request, book_id):
+    """
+    View to display details for a specific book.
+    """
+    book = get_object_or_404(Book, id=book_id)  
+    return render(request, 'bookshelf/book_detail.html', {'book': book})
+
 
 @permission_required('app_name.can_view', raise_exception=True)
 def view_post(request, post_id):
@@ -37,3 +50,4 @@ def delete_post(request, post_id):
         post.delete()
         return redirect('post_list')
     return render(request, 'delete_post.html', {'post': post})
+
