@@ -4,7 +4,7 @@ from rest_framework import generics, permissions
 from .models import Book
 from .serializers import BookSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
-from django_filters import rest_framework, filters.OrderingFilter
+from django_filters import rest_framework, filters.OrderingFilter, filters.SearchFilter
 
 # List all books
 class BookListView(generics.ListAPIView):
