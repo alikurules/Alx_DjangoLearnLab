@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend, SearchFilter, OrderingFilter
 from rest_framework import generics, permissions
 from .models import Book
 from .serializers import BookSerializer
@@ -9,7 +10,12 @@ class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [permissions.AllowAny]  # Read-only access for everyone
-
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ['title', 'author__name', 'publication_year']
+    search_fields = ['title', 'author__name']
+    ordering_fields = ['title', 'publication_year']
+    ordering = ['title']  # Default ordering
+    
 # Retrieve a single book by ID
 class BookDetailView(generics.RetrieveAPIView):
     queryset = Book.objects.all()
@@ -52,3 +58,9 @@ class BookUpdateView(generics.UpdateAPIView):
     def perform_update(self, serializer):
         # Additional behavior during update
         serializer.save()
+
+# BookListView: List all books with advanced query capabilities
+# Features:
+# - Filtering: Filter books by title, author__name, or publication_year
+# - Searching: Search books by title or author's name
+# - Ordering: Order books by title or publication_year
