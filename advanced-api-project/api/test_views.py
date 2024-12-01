@@ -11,6 +11,7 @@ class BookAPITests(APITestCase):
             publication_year=1997,
             author=self.author
         )
+        self.client.login(username="testuser", password="testpassword")  # Login the user
         self.list_url = reverse('book-list')  # Update with your URL name
         self.detail_url = reverse('book-detail', kwargs={'pk': self.book.id})
 
