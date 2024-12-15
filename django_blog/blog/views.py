@@ -13,6 +13,7 @@ from django.urls import reverse_lazy
 
 from .models import Post, Comment
 from .forms import CommentForm
+from taggit.models import Tag
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -129,6 +130,23 @@ def search_posts(request):
         Q(tags__name__icontains=query)
     ).distinct()
     return render(request, 'blog/search_results.html', {'query': query, 'results': results})
+
+
+class PostByTagListView(ListView):
+    model = Post
+    template_name = 'blog/post_list.html'  # Reuse the post list template
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        tag_slug = self.kwargs.get('tag_slug')
+        self.tag = get_object_or_404(Tag, slug=tag_slug)  # Get the tag object
+        return Post.objects.filter(tags__in=[self.tag])  # Filter posts by the tag
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tag'] = self.tag  # Pass the tag to the context
+        return context
+
 
 
 
