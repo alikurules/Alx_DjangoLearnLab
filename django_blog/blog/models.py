@@ -1,14 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from taggit.managers import TaggableManager
+
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=150)
     content = models.TextField()
     published_date = models.DateTimeField(auto_now_add=True)
     # Reference to the User model to track the author of the post
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    tags = TaggableManager()  # Add tagging functionality
 
     def __str__(self):
         return self.title
