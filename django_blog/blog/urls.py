@@ -1,5 +1,8 @@
 from django.urls import path
-from .views import RegisterView
+from .views import  (
+    RegisterView, PostListView, PostDetailView, 
+    PostCreateView, PostUpdateView, PostDeleteView
+)
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -7,4 +10,18 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='registration/logged_out.html'), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
     path('profile/', profile_view, name='profile'),  # Profile management view
+    path('', PostListView.as_view(), name='post-list'),
+    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    path('post/new/', PostCreateView.as_view(), name='post-create'),
+    path('post/<int:pk>/edit/', PostUpdateView.as_view(), name='post-update'),
+    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+]
+
+
+urlpatterns = [
+    path('', PostListView.as_view(), name='post-list'),
+    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    path('post/new/', PostCreateView.as_view(), name='post-create'),
+    path('post/<int:pk>/edit/', PostUpdateView.as_view(), name='post-update'),
+    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
 ]
