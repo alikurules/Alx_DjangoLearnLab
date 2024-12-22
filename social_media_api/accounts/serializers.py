@@ -30,3 +30,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         # Generate a token for the new user
         Token.objects.create(user=user)
         return user
+
+
+User = get_user_model()
+
+class UserFollowingSerializer(serializers.ModelSerializer):
+    following = serializers.PrimaryKeyRelatedField(many=True, queryset=User.objects.all())
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'following']
