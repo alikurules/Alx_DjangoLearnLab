@@ -61,7 +61,7 @@ def unfollow_user(request, user_id):
 
     request.user.following.remove(user_to_unfollow)
     return Response({'message': 'Unfollowed successfully'}, status=status.HTTP_200_OK)
-
+# generics.GenericAPIView, permissions.IsAuthenticated, CustomUser.objects.all()
 # List all users
 class UserListView(generics.ListAPIView):
     queryset = User.objects.all()  # Ensure CustomUser model objects are queried
