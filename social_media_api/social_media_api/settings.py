@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 PORT = 8000  # Default port
 
 # Application definition
-
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
