@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     """Serializer for user registration."""
     password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
-
+# "serializers.CharField()", "get_user_model().objects.create_user"
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
