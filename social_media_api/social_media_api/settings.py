@@ -27,6 +27,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = []
 
+PORT = 8000  # Default port
 
 # Application definition
 
